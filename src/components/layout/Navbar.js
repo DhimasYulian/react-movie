@@ -8,7 +8,7 @@ const Navbar = () => {
             <div className="container">
                 <span className="navbar-brand">React Movie</span>
                 <div className="navbar-nav">
-                    <a href="#" className="nav-item nav-link">List of Movie : {movies.length}</a>
+                    <a href="#" className="nav-item nav-link">List of Movie : {movies === undefined ? <p>0</p> : movies.length}</a>
                 </div>
             </div>
         </nav>

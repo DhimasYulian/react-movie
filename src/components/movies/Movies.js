@@ -4,10 +4,20 @@ import Movie from './Movie';
 import Spinner from '../layout/Spinner';
 
 const Movies = () => {
-    const { movies, isLoading } = useContext(MovieContext);
-    if (movies === undefined || movies.length === 0 || isLoading === true) {
+    const { movies, isLoading, isError } = useContext(MovieContext);
+    if (isLoading) {
         return <Spinner />
     } else {
+        if (isError && !isLoading) {
+            return (
+                <h3 className="mt-4 text-center">Something went wrong</h3>
+            )
+        }
+        if (movies === undefined && !isLoading) {
+            return (
+                <h3 className="mt-4 text-center">Movie not found</h3>
+            )
+        }
         return (
             <React.Fragment>
                 <div className="container">

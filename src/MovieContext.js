@@ -7,16 +7,22 @@ export const MovieProvider = props => {
     const [search, setSearch] = useState("");
     const [query, setQuery] = useState('man');
     const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         getMovies();
-        setIsLoading(false);
     }, [query]);
 
     const getMovies = async () => {
-        const responses = await fetch(`https://www.omdbapi.com/?s=${query}&apikey=${process.env.REACT_APP_OMDB_KEY}`);
-        const data = await responses.json();
-        setMovies(data.Search);
+        setIsLoading(true);
+        try {
+            const responses = await fetch(`https://www.omdbapi.com/?s=${query}&apikey=${process.env.REACT_APP_OMDB_KEY}`);
+            const data = await responses.json();
+            setMovies(data.Search);
+        } catch (err) {
+            setIsError(true);
+        }
+        setIsLoading(false);
     }
 
     const updateSearch = e => {
@@ -34,6 +40,7 @@ export const MovieProvider = props => {
         movies,
         search,
         isLoading,
+        isError,
         getSearch,
         updateSearch
     }

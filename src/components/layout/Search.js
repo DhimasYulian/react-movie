@@ -21,7 +21,7 @@ const Search = () => {
                     </div>
                 </form>
                 <hr />
-                {props.isLoading === true ? <h1 className="text-center mx-auto">Loading...</h1> : ""}
+                {props.isLoading === true ? <h1 className="text-center mx-auto mt-4">Loading...</h1> : ""}
             </div>
         </React.Fragment>
     );
